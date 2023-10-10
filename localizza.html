@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localizza</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm bg-warning">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="navbar-brand" href="pokedex.html">torna indietro</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+</header>
+
+<main id="pokeCenter">
+    <div class="container">
+        <h1 id="titolo"></h1>
+        <div id="map"></div>
+        <div id="weatherInfo">
+            <p>Temperatura: <span id="temperature"></span>°C</p>
+            <p>Descrizione: <span id="description"></span></p>
+            <p>Umidità: <span id="humidity"></span></p>
+            <img id="weatherIcon" src="" alt="Icona meteo">
+        </div>
+    </div>
+</main>
+
+<footer>
+
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+  </script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+
+        let titolo = document.querySelector("#titolo");
+        titolo.innerHTML ="Il tuo "+ JSON.parse(localStorage.getItem("pokemon")).nome+" è qui!";
+
+        let map = null;
+
+        let nomeCitta = "via Alessandro III, 8, Roma";
+
+        function pokeMap() {
+            map = L.map("map").setView([0, 0], 20);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+        }
+
+        function cercaCitta() {
+            let nome = nomeCitta;
+
+            if (map == null) {
+                pokeMap();
+            }
+
+            cercaPokemon(nome);
+            // document.querySelector("#map").removeAttribute("class");
+
+        }
+
+        function cercaPokemon(nome) {
+            let nominatimUrl = 'https://nominatim.openstreetmap.org/search?format=json&q=' + nome;
+
+            fetch(nominatimUrl)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    if (data.length > 0) {
+                        let lat = parseFloat(data[0].lat);
+                        let lon = parseFloat(data[0].lon);
+                        mostraLuogoSuMappa(lat, lon, nome);
+                    } else {
+                        alert('Città non trovata.');s
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    alert('Si è verificato un errore nella ricerca della città.');
+                });
+        }
+        let imgMarker = JSON.parse(localStorage.getItem("pokemon")).img;
+
+        let myIcon = L.icon({
+            iconUrl: imgMarker,
+            iconSize: [60, 60],
+            iconAnchor: [20, 0]
+        });
+
+        function mostraLuogoSuMappa(lat, lon, nome) {
+            map.setView([lat, lon], 10);
+
+            //L.marker([lat, lon]).addTo(map).bindPopup(nome).openPopup();
+            L.marker([lat, lon], {
+                icon: myIcon
+            }).addTo(map).bindPopup(nome).openPopup();
+        }
+
+        document.addEventListener("DOMContentLoaded", cercaCitta);
+        document.addEventListener("DOMContentLoaded", getWeather);
+
+        function getWeather() {
+            let city = "Roma";
+            let apiKey = 'd710824854c074273125389a2f8728ca';
+            let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    let temperature = data.main.temp;
+                    let description = data.weather[0].description;
+                    let humidity = data.main.humidity;
+                    let weatherIcon = data.weather[0].icon;
+
+                    let temperatureElement = document.querySelector('#temperature');
+                    let descriptionElement = document.querySelector('#description');
+                    let humidityElement = document.querySelector('#humidity');
+                    let weatherIconElement = document.querySelector('#weatherIcon');
+
+                    temperatureElement.textContent = temperature;
+                    descriptionElement.textContent = description;
+                    humidityElement.textContent = humidity + "%";
+
+                    let iconUrl = `https://openweathermap.org/img/wn/${weatherIcon}.png`;
+                    weatherIconElement.src = iconUrl;
+                })
+                .catch(error => {
+                    console.error('Errore nella richiesta meteo:', error);
+                    let weatherInfo = document.querySelector('#weatherInfo');
+                    weatherInfo.innerHTML = 'Errore nella richiesta meteo';
+                });
+        }
+    </script>
+</body>
+
+</html>

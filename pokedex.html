@@ -13,6 +13,8 @@
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
+
+  
   <link rel="stylesheet" href="./css/style.css">
 
 <body>
@@ -45,31 +47,27 @@
 
   <main id="pokeCenter">
     <div class="container mt-5">
-      <div id="saluto" class="d-flex justify-content-evenly">
+      <div  class="d-flex justify-content-evenly">
 
         <img src="./img/pokedex.png" class="card-img-top rounded-circle img-thumbnail" id="imgAvatar">
         <div class="card col-8 d-flex flex-row align-items-center bg-white border-3 border-danger shadow rounded ">
 
           <div class="card-body">
 
-            <h6 class="card-text"></h6>
+            <h4 class="card-text">Elenco dei pokemon catturati</h4>
 
           </div>
         </div>
       </div>
 
-      <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-4 m-5" id="listaPokemon"></div>
+      <div class="row row-cols-sm-1 row-cols-md-1 row-cols-lg-2 g-4 mt-5 mb-5 pb-5 d-flex justify-content-center" id="listaPokemon"></div>
     </div>
-    <!-- <div id="map"></div>
-    <div id="meteo" style="display: none;">
-      <h2>Controlla meteo nella località</h2>
-      <p id="meteo-info"></p>
-    </div> -->
+ 
 
   </main>
-  <footer class="bg-black fixed-bottom " id="fine">
+  <footer class="bg-black fixed-bottom mt-5" id="fine">
     <!-- place footer here -->
-    <p>JAITA93 - Gruppo Laura, Mauro, Fabiola e Giovanni</p>
+    <p class="text-white-50">JAITA93 - Gruppo Laura, Mauro, Fabiola e Giovanni</p>
   </footer>
 
 
@@ -125,7 +123,7 @@
 
             let btnDelete = document.createElement("button");
             btnDelete.innerHTML = "LIBERA";
-            btnDelete.setAttribute("class", "btn btn-danger btnCard");
+            btnDelete.setAttribute("class", "btn btn-danger btn-sm m-1 ");
 
             function liberaPoke() {
               let UrlDelete = "http://localhost:3000/pokedex/" + pokemon.id;
@@ -145,13 +143,14 @@
             divCard.appendChild(divCardBody);
 
             let cardBody =
-              `<h5 class="card-title">${pokemon.nome}</h5><pclass="card-text">${pokemon.descrizione}</p>`;
+              `<h5 class="card-title text-capitalize"><strong> ${pokemon.nome} </strong> </h5>
+              <p class="card-text lh-1">${pokemon.descrizione}</p>`;
 
             let btnPoke = document.createElement(
               "button");
             btnPoke.innerHTML = "MODIFICA";
             btnPoke.setAttribute("class",
-              "btn btn-warning btnCard");
+              "btn btn-warning btn-sm m-1");
 
             divCardBody.innerHTML = cardBody;
             divCardBody.appendChild(btnPoke);
@@ -167,7 +166,7 @@
 
             let btnLoc = document.createElement("button");
             btnLoc.innerHTML = "LOCALIZZA";
-            btnLoc.setAttribute("class", "btn btn-primary btnCard");
+            btnLoc.setAttribute("class", "btn btn-primary btn-sm m-1");
 
             divCardBody.appendChild(btnLoc);
 
@@ -180,6 +179,8 @@
 
 
             btnPoke.addEventListener("click", modificaPokemon);
+
+
           });
         })
     }

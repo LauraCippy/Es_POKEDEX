@@ -25,6 +25,12 @@ img, #profOak{
     width: 100px;
 }
 
+#imgPoke{
+    width: 250px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: red;   
+}
 
 #imgAvatar{
     width: 150px;
@@ -35,10 +41,15 @@ img, #profOak{
 
 #imgPokemonCard{
     border: 3px;
-
+    
 }
 
 #map {
-    height: 600px;
+    height: 400px;
     width: auto;
 }
+
+#weatherIcon{
+    width: 50px;
+}
+

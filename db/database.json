@@ -1,68 +1,11 @@
 {
   "allenatori": [
     {
-      "nome": "Arianna",
-      "genere": "2",
+      "isTrusted": true,
       "id": 1
-    },
-    {
-      "nome": "Arianna",
-      "genere": "2",
-      "id": 2
-    },
-    {
-      "nome": "Drach",
-      "genere": "f",
-      "id": 3
-    },
-    {
-      "nome": "Drach",
-      "genere": "f",
-      "id": 4
-    },
-    {
-      "nome": "Arianna",
-      "genere": "f",
-      "id": 5
-    },
-    {
-      "nome": "Giogio",
-      "genere": "m",
-      "id": 6
-    },
-    {
-      "nome": "Drach",
-      "genere": "m",
-      "id": 7
-    },
-    {
-      "nome": "Drach",
-      "genere": "f",
-      "id": 8
-    },
-    {
-      "nome": "Drach",
-      "genere": "f",
-      "id": 9
-    },
-    {
-      "nome": "Arianna",
-      "genere": "f",
-      "id": 10
-    },
-    {
-      "nome": "Drach",
-      "genere": "m",
-      "id": 11
     }
   ],
   "pokedex": [
-    {
-      "nome": "ivysaur",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/2.gif",
-      "descrizione": "Dopo aver assorbito sufficienti sostanze nutrienti,\nil bulbo sulla schiena sboccia in un magnifico fiore.",
-      "id": 1
-    },
     {
       "nome": "pidgeot",
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/18.gif",
@@ -70,10 +13,16 @@
       "id": 2
     },
     {
-      "nome": "rattata",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/19.gif",
-      "descrizione": "Vive ovunque si trovi del cibo, cercando\nincessantemente qualsiasi cosa sia commestibile.",
+      "nome": "blastoise",
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/9.gif",
+      "descrizione": "Mette KO gli avversari schiacciandoli sotto il corpo\npossente. Se è in difficoltà, può ritrarsi nella corazza.",
       "id": 3
+    },
+    {
+      "nome": "charizard",
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/6.gif",
+      "descrizione": "Quando emette le sue lingue di fuoco, la fiamma\nrossa sulla punta della coda brucia più intensamente.",
+      "id": 4
     }
   ]
 }
